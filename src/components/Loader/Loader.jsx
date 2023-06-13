@@ -1,20 +1,26 @@
-import { Grid } from "react-loader-spinner"
+import { FallingLines } from "react-loader-spinner"
 import { LoaderWrap } from "./Loader.styled"
+// import React, { useState, useEffect } from "react";
+
 
 
 export const Loader = () => {
+    // const useEff = useEffect(() => {
+    //     const timer = setTimeout(() => {
+          
+    //     }, 500);
+    //     return () => clearTimeout(timer);
+    //   }, []);
+
     return (
     <LoaderWrap>
-        <Grid
-            height="80"
-            width="80"
-            color="#4fa94d"
-            ariaLabel="grid-loading"
-            radius="12.5"
-            wrapperStyle={{}}
-            wrapperClass=""
-            visible={true}
-            />
-    </LoaderWrap>
+      <FallingLines
+        color="#4fa94d"
+        width="100"
+        visible={true}
+        ariaLabel='falling-lines-loading'
+/>
+   </LoaderWrap>
     )
+
 }
