@@ -1,5 +1,5 @@
-import { FallingLines } from "react-loader-spinner"
-import { LoaderWrap } from "./Loader.styled"
+import { FallingLines } from "react-loader-spinner";
+import { LoaderWrap } from "./Loader.styled";
 // import React, { useState, useEffect } from "react";
 
 
