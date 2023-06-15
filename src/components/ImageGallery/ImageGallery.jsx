@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
-import { fetchPixabayApi } from '../Api/api';
+import { fetchPixabayApi } from '../Api/Api';
 import { GalleryItem } from 'components/ImageGalleryItem/ImageGalleryItem';
 import { ErrorMessage, GalleryList, ListItem } from './ImageGallery.styled';
 import { LoadMore } from 'components/Button/Button';
