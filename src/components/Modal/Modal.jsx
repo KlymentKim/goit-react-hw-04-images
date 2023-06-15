@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 import { ModalWrap, Overlay } from './Modal.styled';
 
-const modal = document.querySelector('#root');
+const modal = document.querySelector('#modal-root');
 
 
 export class Modal extends Component {
