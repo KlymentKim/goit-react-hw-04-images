@@ -1,4 +1,5 @@
-import { Component } from 'react';
+import { useEffect, useState, useLayoutEffect } from 'react'
+import React from 'react';
 import PropTypes from 'prop-types';
 import { fetchPixabayApi } from '../Api/Api';
 import { GalleryItem } from 'components/ImageGalleryItem/ImageGalleryItem';
@@ -6,69 +7,66 @@ import { ErrorMessage, GalleryList, ListItem } from './ImageGallery.styled';
 import { LoadMore } from 'components/Button/Button';
 import { Loader } from 'components/Loader/Loader';
 
-export class ImageGallery extends Component {
-    static propTypes = {
-        value: PropTypes.string.isRequired
-  };
+export const ImageGallery = ({value}) =>{
+    const [images, setImages] = useState([]);
+    const [page, setPage] = useState(1);
+    const [isLoading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+    const [hits, setHits] = useState(0);
 
-    state = {
-        images: [],
-        page: 1,
-        isLoading: false,
-        error: null,
-        // навіщо рендерити кнопку якщо нам прийде наприклад 9 картинок? Зроблю через порівняння totalhits та perpage
-        hits: 0,
-    }
-
-    componentDidUpdate(prevProps, prevState) {
-
-        if (prevProps.value !== this.props.value) {
-            this.setState({ images: [], page: 1 });
-            this.fetchImages();
-
+    useEffect(() => {
+        if (!value) {
+            return
         }
 
-        if (prevState.page < this.state.page) {
-            this.fetchImages();      
-        }
-    }
+        const fetchImages = async (query, currentPage) => {   
+            try {
+                setLoading(true);
+                const resp = await fetchPixabayApi(query, currentPage);
 
-    fetchImages = async () => {   
-        try {
-            this.setState({ isLoading: true });
-            const resp = await fetchPixabayApi(this.props.value.trim(), this.state.page);
-
-            if (!resp || resp.hits.length === 0) {
-                this.setState({
-                    error: 'Sorry, there are no images matching your search query. Please try again.'
-                })
-                return
-            }
-            
-
-            this.setState({
-                images: [...this.state.images, ...resp.hits],
-                error: null
-            })
-            this.setState({hits: resp.totalHits})
-            }
-            catch (err) {
-                this.setState({ error: String(err) });
-            }
-            finally {
-                this.setState({ isLoading: false });
-            }
+                if (!resp || resp.hits.length === 0) {
+                    setImages([])
+                    setError('Sorry, there are no images matching your search query. Please try again.')
+                    return
+                }
+                
+                setImages(prevState => (page === 1) ? [...resp.hits] : [...prevState, ...resp.hits]);
+                setError(null);
+                setHits(resp.totalHits);
+                }
+                catch (err) {
+                    setError(String(err));
+                }
+                finally {
+                    setLoading(false)
+                }
         }
     
+        fetchImages(value.trim(), page);
+    }, [value, page]);
 
-    loadMore = () => {
-		this.setState((prevState) => ({ page: prevState.page + 1 }))
+    useEffect(() => {
+        setImages([]);
+        setPage(1);
+    }, [value]);
+
+    useLayoutEffect(() => {
+        if(page > 1) {
+            window.scrollTo({
+            left: 0,
+            top: document.body.scrollHeight,
+            behavior: "smooth",
+        });
+        }
+    }, [images, page]);
+
+
+
+    const loadMore = () => {
+        setPage(prevPage => prevPage + 1)
     }
 
-
-    render() {
-        const PER_PAGE = 12;
-        const { images, hits, error, isLoading } = this.state;
+    const PER_PAGE = 12;
 
         return (
             <>
@@ -84,11 +82,13 @@ export class ImageGallery extends Component {
             </GalleryList>
                 
             {PER_PAGE < hits && (
-                <LoadMore handleClick={this.loadMore} />
+                <LoadMore handleClick={loadMore} />
             )}
             {isLoading && <Loader/>}
             </>
         )
+}
 
-    }
+ImageGallery.propTypes = {
+    value: PropTypes.string.isRequired
 }

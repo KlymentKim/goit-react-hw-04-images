@@ -1,47 +1,51 @@
-import { Component } from 'react';
-import { Modal } from 'components/Modal/Modal';
+import { useEffect } from 'react'
+import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
-import { GalleryImage } from './ImageGalleryItem.styled';
+import { ModalWrap, Overlay } from './Modal.styled';
 
-// export const GalleryIte = ({image: {webformatURL, id, largeImageURL, tags}, isOpen, onClose}) => {
-//     return(
-//             <>
-//             <GalleryImage src={webformatURL} alt={tags} />
-//             {isOpen && <Modal largeImageURL={largeImageURL} tags={tags} onClose={onClose}/>}         
-//             </>
-//     )
-// }
+const modal = document.querySelector('#modal-root');
 
-// GalleryItem.propTypes = {
-//   image: PropTypes.shape({
-//       webformatURL: PropTypes.string.isRequired,
-//     })
-// };
 
-export class GalleryItem extends Component {
-    static propTypes = {
-        image: PropTypes.shape({
-            webformatURL: PropTypes.string.isRequired,
-            largeImageURL: PropTypes.string.isRequired,
-            tags: PropTypes.string.isRequired
-            })
+export const Modal = ({ onClose, tags, largeImageURL }) => {
+  
+  useEffect(() => {
+    const onKeyDown = event => {
+      if (event.code === 'Escape') {
+        onClose();
+      }
     };
     
-    state = {
-        isModalOpen: false
-    }
+    window.addEventListener('keydown', onKeyDown);
 
-    toggleModal = () => this.setState(prevState =>
-        ({ isModalOpen: !prevState.isModalOpen }));
-    
-    render() {
-        const { webformatURL, tags, largeImageURL } = this.props.image;
-
-        return (
-            <div onClick={this.toggleModal}>
-            <GalleryImage src={webformatURL} alt={tags} />
-            {this.state.isModalOpen && <Modal largeImageURL={largeImageURL} tags={tags} onClose={this.toggleModal}/>}         
-            </div>
-        )
+    return () => {
+      window.removeEventListener('keydown', onKeyDown);
     }
+  }, [onClose]);
+
+
+
+
+  const onBackdropClick = event => {
+    event.stopPropagation();
+    if (event.target === event.currentTarget) {
+      onClose();
+    }
+  };
+
+        return createPortal(
+            <Overlay onClick={onBackdropClick}>
+                <ModalWrap>
+                    <img src={largeImageURL} alt={tags} />
+                </ModalWrap>
+            </Overlay>,
+            modal
+        );
+
+}
+
+
+Modal.propTypes = {
+    onClose: PropTypes.func.isRequired,
+    largeImageURL: PropTypes.string.isRequired,
+    tags: PropTypes.string.isRequired
 }
