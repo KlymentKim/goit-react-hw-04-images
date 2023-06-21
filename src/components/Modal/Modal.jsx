@@ -5,6 +5,7 @@ import { ModalWrap, Overlay } from './Modal.styled';
 
 const modal = document.querySelector('#root');
 
+
 export const Modal = ({ onClose, tags, largeImageURL }) => {
   
   useEffect(() => {

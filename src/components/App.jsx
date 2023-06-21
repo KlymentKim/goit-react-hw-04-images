@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { GlobalStyles } from "./GlobalStyled";
@@ -6,26 +6,21 @@ import { ImageGallery } from "./ImageGallery/ImageGallery";
 import { Layout } from "./Layout";
 import { Searchbar } from "./Searchbar/Searchbar";
 
-export class App extends Component {
+export const App = () => {
+  const [imageSearch, setImageSearch] = useState('');
 
-  state = {
-		imageSearch: '',
+
+	const onFormSubmit = (search) => {
+    setImageSearch(search);
 	}
-
-	onFormSubmit = (imageSearch) => {
-		this.setState({ imageSearch })
-	}
-
-
-  render() {
 
 
     return (
       <Layout>
         <GlobalStyles />
         <ToastContainer />
-        <Searchbar onSubmit={this.onFormSubmit} />
-        <ImageGallery value={this.state.imageSearch}/>
+        <Searchbar onSubmit={onFormSubmit} />
+        <ImageGallery value={imageSearch}/>
       </Layout>
-  )}
+  )
 }
