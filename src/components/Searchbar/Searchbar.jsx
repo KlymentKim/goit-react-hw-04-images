@@ -18,13 +18,6 @@ export const Searchbar = ({ onSubmit }) => {
 
         if (searchQuary.trim() === '') {
             toast.warning('Введіть пошуковий запит', <ToastStyle />);
-            
-           
-            
-            
-               
-           
-            
         }
 
         onSubmit(searchQuary)
