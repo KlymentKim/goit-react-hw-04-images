@@ -1,6 +1,6 @@
 import { createGlobalStyle } from 'styled-components'
 
-export const GlobalStyles = createGlobalStyle`
+const GlobalStyles = createGlobalStyle`
     ul {
         list-style-type: none;
         margin: 0;
@@ -35,3 +35,5 @@ export const GlobalStyles = createGlobalStyle`
         height: auto;
     }
 `;
+
+export default GlobalStyles;

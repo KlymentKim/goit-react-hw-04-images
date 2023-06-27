@@ -1,12 +1,12 @@
 import { useEffect, useState, useLayoutEffect } from 'react'
 import PropTypes from 'prop-types';
 import { fetchPixabayApi } from '../Api/Api';
-import { GalleryItem} from 'components/ImageGalleryItem/ImageGalleryItem';
+import  GalleryItem from 'components/ImageGalleryItem/ImageGalleryItem';
 import { ErrorMessage, GalleryList, ListItem } from './ImageGallery.styled';
-import { LoadMore } from 'components/Button/Button';
-import { Loader } from 'components/Loader/Loader';
+import LoadMore from 'components/Button/Button';
+import Loader  from 'components/Loader/Loader';
 
-export const ImageGallery = ({value}) =>{
+const ImageGallery = ({value}) =>{
     const [images, setImages] = useState([]);
     const [page, setPage] = useState(1);
     const [isLoading, setLoading] = useState(false);
@@ -91,3 +91,5 @@ export const ImageGallery = ({value}) =>{
 ImageGallery.propTypes = {
     value: PropTypes.string.isRequired
 }
+
+export default ImageGallery;

@@ -2,9 +2,7 @@ import { FallingLines } from "react-loader-spinner";
 import { LoaderWrap } from "./Loader.styled";
 // import React, { useState, useEffect } from "react";
 
-
-
-export const Loader = () => {
+const Loader = () => {
     // const useEff = useEffect(() => {
     //     const timer = setTimeout(() => {
           
@@ -24,3 +22,5 @@ export const Loader = () => {
     )
 
 }
+
+export default Loader;

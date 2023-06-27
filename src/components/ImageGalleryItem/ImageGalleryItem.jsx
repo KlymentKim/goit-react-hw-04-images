@@ -1,17 +1,14 @@
 import { useState } from 'react'
-import { Modal } from 'components/Modal/Modal';
+import Modal  from 'components/Modal/Modal';
 import PropTypes from 'prop-types';
 import { GalleryImage } from './ImageGalleryItem.styled';
 
 
-export const GalleryItem = ({ image: { webformatURL, id, largeImageURL, tags } }) =>  {
+const GalleryItem = ({ image: { webformatURL, id, largeImageURL, tags } }) =>  {
   const [isModalOpen, setModalStatus] = useState(false)
   
-
-
-  const toggleModal = () => setModalStatus(prevState => !prevState)
+const toggleModal = () => setModalStatus(prevState => !prevState)
   
-
       return (
           <div onClick={toggleModal}>
           <GalleryImage src={webformatURL} alt={tags} />
@@ -20,7 +17,6 @@ export const GalleryItem = ({ image: { webformatURL, id, largeImageURL, tags } }
       )
 }
 
-
 GalleryItem.propTypes = {
   image: PropTypes.shape({
       webformatURL: PropTypes.string.isRequired,
@@ -28,3 +24,4 @@ GalleryItem.propTypes = {
       tags: PropTypes.string.isRequired
   })
 }
+export default GalleryItem;

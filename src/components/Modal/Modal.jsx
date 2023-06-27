@@ -5,7 +5,7 @@ import { ModalWrap, Overlay } from './Modal.styled';
 const modal = document.querySelector('#root');
 
 
-export const Modal = ({ onClose, tags, largeImageURL }) => {
+const Modal = ({ onClose, tags, largeImageURL }) => {
   
   useEffect(() => {
     const onKeyDown = event => {
@@ -20,9 +20,6 @@ export const Modal = ({ onClose, tags, largeImageURL }) => {
       window.removeEventListener('keydown', onKeyDown);
     }
   }, [onClose]);
-
-
-
 
   const onBackdropClick = event => {
     event.stopPropagation();
@@ -42,9 +39,10 @@ export const Modal = ({ onClose, tags, largeImageURL }) => {
 
 }
 
-
 Modal.propTypes = {
     onClose: PropTypes.func.isRequired,
     largeImageURL: PropTypes.string.isRequired,
     tags: PropTypes.string.isRequired
 }
+
+export default Modal;
