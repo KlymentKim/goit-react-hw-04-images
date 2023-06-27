@@ -21,7 +21,7 @@ const Searchbar = ({ onSubmit }) => {
         }
 
         onSubmit(searchQuary)
-        setQuary('');
+        setQuary(`${1}`);
     }
 
         return (
@@ -36,7 +36,7 @@ const Searchbar = ({ onSubmit }) => {
                         type="text"
                         autocomplete="off"
                         value={searchQuary}
-                        placeholder="Search images and photos"
+                        placeholder="Pixabay - Search images and photos"
                         onChange={handleQuaryChange}
                         />
                     </SearchForm>
