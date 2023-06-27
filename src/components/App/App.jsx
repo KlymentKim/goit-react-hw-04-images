@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import  GlobalStyles  from "./GlobalStyled";
-import ImageGallery from "./ImageGallery/ImageGallery";
+import  GlobalStyles  from "../GlobalStyled";
+import ImageGallery from "../ImageGallery/ImageGallery";
 // import  ImageGallery from "/ImageGallery/ImageGallery";
-import { Layout } from "./Layout";
-import  Searchbar  from "./Searchbar/Searchbar";
+import { Layout } from "../Layout";
+import  Searchbar  from "../Searchbar/Searchbar";
 
 const App = () => {
   const [imageSearch, setImageSearch] = useState('');
