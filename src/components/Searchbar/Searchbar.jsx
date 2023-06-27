@@ -2,7 +2,7 @@ import React, {useState } from "react"
 import PropTypes from 'prop-types';
 import { toast } from "react-toastify";
 import {BsSearch} from 'react-icons/bs'
-import { Input, SearchButton, SearchForm, SearchHead } from "./Searchbar.styled";
+import { Input, SearchButton, SearchForm, SearchHead, ToastStyle } from "./Searchbar.styled";
 
 
 export const Searchbar = ({ onSubmit }) => {
@@ -10,14 +10,21 @@ export const Searchbar = ({ onSubmit }) => {
 
     
     const handleQuaryChange = e => {
-        setQuary(e.currentTarget.value.trim().toLowerCase())
+        setQuary(e.target.value.trim().toLowerCase())
     }
 
     const handleSubmit = e => {
         e.preventDefault();
 
         if (searchQuary.trim() === '') {
-            toast('Введіть пошуковий запит')
+            toast.warning('Введіть пошуковий запит', <ToastStyle />);
+            
+           
+            
+            
+               
+           
+            
         }
 
         onSubmit(searchQuary)

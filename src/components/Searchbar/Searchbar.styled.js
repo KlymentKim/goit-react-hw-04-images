@@ -56,3 +56,13 @@ export const Input = styled.input`
     padding-left: 4px;
     padding-right: 4px;
 `
+export const ToastStyle = styled.div`
+    position: "top-right",
+    autoClose: 3000,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "dark",
+`
