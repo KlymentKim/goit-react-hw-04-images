@@ -5,31 +5,35 @@ import { ModalWrap, Overlay } from './Modal.styled';
 
 const modal = document.querySelector('#modal-root');
 
-const Modal = ({ onClose, tags, largeImageURL }) => {
+const Modal = ({largeImageURL, tags, onClose  }) => {
   
   useEffect(() => {
-    const onKeyDown = event => {
+    const handleOnKeyDown = event => {
       if (event.code === 'Escape') {
         onClose();
       }
     };
     
-    window.addEventListener('keydown', onKeyDown);
+    // Добавляем обработчик события нажатия клавиши
+    window.addEventListener('keydown', handleOnKeyDown);
+    document.body.style.overflow = 'hidden';
 
     return () => {
-      window.removeEventListener('keydown', onKeyDown);
+       // Удаляем обработчик события нажатия клавиши
+      window.removeEventListener('keydown', handleOnKeyDown);
+      document.body.style.overflow = 'visible';
     }
   }, [onClose]);
 
-  const onBackdropClick = event => {
+  const handleonBackdropClick = event => {
     event.stopPropagation();
-    if (event.target === event.currentTarget) {
+    if (event.currentTarget === event.target) {
       onClose();
     }
   };
 
         return createPortal(
-            <Overlay onClick={onBackdropClick}>
+            <Overlay onClick={handleonBackdropClick}>
                 <ModalWrap>
                     <img src={largeImageURL} alt={tags} />
                 </ModalWrap>
