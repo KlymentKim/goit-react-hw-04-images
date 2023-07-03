@@ -2,8 +2,8 @@ import { useEffect } from 'react'
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 import { ModalWrap, Overlay } from './Modal.styled';
-const modal = document.querySelector('#root');
 
+const modal = document.querySelector('#modal-root');
 
 const Modal = ({ onClose, tags, largeImageURL }) => {
   
