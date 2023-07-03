@@ -17,7 +17,7 @@ const Searchbar = ({ onSubmit }) => {
 
     const handleSubmit = event => {
         event.preventDefault();
-        setSearchQuary(inputValue.trim());
+        setSearchQuary(searchQuary.trim());
         onSubmit(inputValue);
 
         if (inputValue.trim() === '') {
