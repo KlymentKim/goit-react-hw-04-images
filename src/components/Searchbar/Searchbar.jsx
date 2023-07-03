@@ -24,9 +24,7 @@ const Searchbar = ({ onSubmit }) => {
             toast.warning('Введіть пошуковий запит', <ToastStyle />);
         }
         // setSearchQuary(`${''}`);
-    
-       
-        // event.target.reset();
+         event.target.reset();
     }
 
         return (
