@@ -18,13 +18,13 @@ const Searchbar = ({ onSubmit }) => {
     const handleSubmit = event => {
         event.preventDefault();
         setSearchQuary(inputValue.trim());
-        onSubmit(searchQuary);
+        onSubmit(inputValue);
 
         if (inputValue.trim() === '') {
             toast.warning('Введіть пошуковий запит', <ToastStyle />);
         }
-            // setSearchQuary(`${''}`);
-           //  event.target.reset();
+     
+        setInputValue('');
     };
 
         return (
