@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 import { ModalWrap, Overlay } from './Modal.styled';
 
-const modal = document.querySelector('#modal-root');
+const modalRoot = document.querySelector('#modal-root');
 
 const Modal = ({largeImageURL, tags, onClose  }) => {
   
@@ -38,15 +38,15 @@ const Modal = ({largeImageURL, tags, onClose  }) => {
                     <img src={largeImageURL} alt={tags} />
                 </ModalWrap>
             </Overlay>,
-            modal
+            // Рендерим модальное окно в объект modalRoot в DOM-дереве
+            modalRoot
         );
 
 }
 
 Modal.propTypes = {
-    onClose: PropTypes.func.isRequired,
     largeImageURL: PropTypes.string.isRequired,
-    tags: PropTypes.string.isRequired
+    tags: PropTypes.string.isRequired,
+    onClose: PropTypes.func.isRequired,   
 }
-
 export default Modal;

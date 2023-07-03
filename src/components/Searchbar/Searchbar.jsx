@@ -2,26 +2,31 @@ import React, {useState } from "react"
 import PropTypes from 'prop-types';
 import { toast } from "react-toastify";
 import {BsSearch} from 'react-icons/bs'
-import { Input, SearchButton, SearchForm, SearchHead, ToastStyle } from "./Searchbar.styled";
+import {Input, 
+        SearchButton,
+        SearchForm,
+        SearchHead,
+        ToastStyle } from "./Searchbar.styled";
 
 
 const Searchbar = ({ onSubmit }) => {
-    const [searchQuary, setQuary] = useState('');
-
+    const [searchQuary, setSearchQuary] = useState('');
+    const [inputValue, setInputValue] = useState('');
     
-    const handleQuaryChange = e => {
-        setQuary(e.target.value.trim().toLowerCase())
-    }
+    const handleQuaryChange = event => setInputValue(event.target.value);
 
-    const handleSubmit = e => {
-        e.preventDefault();
+    const handleSubmit = event => {
+        event.preventDefault();
+        setSearchQuary(inputValue.trim());
+        onSubmit(searchQuary);
 
-        if (searchQuary.trim() === '') {
+        if (inputValue.trim() === '') {
             toast.warning('Введіть пошуковий запит', <ToastStyle />);
         }
-
-        onSubmit(searchQuary)
-        setQuary(`${1}`);
+        // setSearchQuary(`${''}`);
+    
+       
+        // event.target.reset();
     }
 
         return (
@@ -35,8 +40,8 @@ const Searchbar = ({ onSubmit }) => {
                         <Input
                         type="text"
                         autocomplete="off"
-                        value={searchQuary}
-                        placeholder="Pixabay - Search images and photos"
+                        value={inputValue}
+                        placeholder="Pixabay: searching images..."
                         onChange={handleQuaryChange}
                         />
                     </SearchForm>
