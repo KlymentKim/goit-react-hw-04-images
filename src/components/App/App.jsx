@@ -8,14 +8,11 @@ import { Layout } from "../Layout";
 import  Searchbar  from "../Searchbar/Searchbar";
 
 const App = () => {
-  const [imageSearch, setImageSearch] = useState('');
-
+  const [imageSearch, setImageSearch] = useState(null);
 
 	const onFormSubmit = (search) => {
     setImageSearch(search);
 	}
-
-
     return (
       <Layout>
         <GlobalStyles />
