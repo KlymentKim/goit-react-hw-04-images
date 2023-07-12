@@ -13,17 +13,16 @@ const Searchbar = ({ onSubmit }) => {
     const [searchQuary, setSearchQuary] = useState('');
     const [inputValue, setInputValue] = useState('');
     
-    const handleQuaryChange = event => setInputValue(event.target.value);
+    const handleQuaryChange = event => 
+    setInputValue(event.currentTarget.value.toLowerCase());
 
     const handleSubmit = event => {
         event.preventDefault();
-        setSearchQuary(searchQuary.trim());
-        onSubmit(inputValue);
-
         if (inputValue.trim() === '') {
             toast.warning('Введіть пошуковий запит', <ToastStyle />);
         }
-     
+        setSearchQuary(searchQuary.trim());
+        onSubmit(inputValue);
         setInputValue('');
     };
 
@@ -32,6 +31,7 @@ const Searchbar = ({ onSubmit }) => {
                 <SearchHead>
                     <SearchForm onSubmit={handleSubmit}>
                         <SearchButton type="submit">
+                            {/* //icons search */}
                         <BsSearch size='15'/> 
                         </SearchButton>
 
