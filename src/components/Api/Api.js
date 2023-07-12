@@ -9,8 +9,7 @@ export const quantityPage = 12;
 
 export const fetchPixabayApi = async (inputValue, page = 1) => {
     const response = await axios.get(
-        `?key=${API_KEY}&q=${inputValue}&image_type=${IMAGE_TYPE}&orientation=${ORIENTATION}&safesearch=${SAFESEARCH}&page=
-        ${page}&${quantityPage}`
+        `?key=${API_KEY}&q=${inputValue}&image_type=${IMAGE_TYPE}&orientation=${ORIENTATION}&safesearch=${SAFESEARCH}&page=${page}&${quantityPage}`
     );
     return response.data;
 };
